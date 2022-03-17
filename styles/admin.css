@@ -32,6 +32,11 @@
     transition: 0.2s;
 }
 
+.data_button.active {
+    background-color: #009fb0;
+    color: #fff;
+}
+
 .data_button:hover {
     background-color: #009fb0;
     color: #fff;
@@ -47,18 +52,14 @@
     top: 0;
     left: 0;
     right: 0;
-    bottom: 35px;
-}
-
-.main__data {
-    display: flex;
-    justify-content: space-between;
-    height: 100%;
+    bottom: 44px;
 }
 
 .data__grid {
     flex: 1 1 auto;
+    height: 100%;
 }
+.show__brand,
 .show__element {
     flex: 0 0 300px;
     background-color: #009fb0;
@@ -110,4 +111,19 @@
     color: #fff;
     font-weight: 700;
     font-size: 16px;
+}
+.admin__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.admin__header_btn {
+    background-color: #f68038;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
 }

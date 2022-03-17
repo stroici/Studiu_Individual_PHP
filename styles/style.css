@@ -272,6 +272,9 @@ body {
     padding: 5px 12px;
     border-radius: 10px;
     margin: 10px;
+    background-color: transparent;
+    cursor: pointer;
+    border: none;
 }
 .menu__link:hover {
     background-color: #006a75;
@@ -399,4 +402,14 @@ body {
     flex: 1 1 auto;
     margin-top: 35px;
     position: relative;
+}
+.admin__header_btn {
+    background-color: #f68038;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
 }

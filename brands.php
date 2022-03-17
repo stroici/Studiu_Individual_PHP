@@ -113,15 +113,12 @@
         <main class="container main">
             <div class="main__body">
                 <div class="admin__header">
-                    <h2 style="color:#888; margin-bottom:10px;">Administrare Utilizatori</h2>
+                    <h2 style="color:#888; margin-bottom:10px;">Administrare Branduri</h2>
                 </div>
                 <div class="main__user__data">
                     <div calss="data_grid">
                         <div class="data__header">
                             <p class="data__header_col">Name</p>
-                            <p class="data__header_col">Surname</p>
-                            <p class="data__header_col">Email</p>
-                            <p class="data__header_col">Password</p>
                         </div>
                         <div class="elements__list">
                         <?php   
@@ -138,11 +135,11 @@
                         die("Conexiunea esuata: " . $conn->connect_error);
                         } else {
                         
-                        $result=$conn->query("SELECT * FROM User");
+                        $result=$conn->query("SELECT * FROM brand");
                         while($row=$result->fetch_array()){
                             echo "<button class='data_button' name='$row[0]' onclick='DataClick(this)'>";
-                            echo "<form action='delete_user.php' method='post' class='data__row'>";
-                            echo "<p>".$row[1]."</p><p>".$row[2]."</p><p>".$row[3]."</p><p>".$row[4]."</p>
+                            echo "<form action='delete_brand.php' method='post' class='data__row'>";
+                            echo "<p>".$row[1]."</p>
                             <input type='hidden' name='id_a' value=".$row[0]."><input class='delete_button' type='submit' value='Sterge'>";
                             echo "</form>";
                             echo "</button>";
@@ -154,17 +151,11 @@
                         </div>
                     </div>
                     <div class="show__element">
-                        <p class="show__elemet_title">User data</p>
+                        <p class="show__elemet_title">Brand data</p>
                        <form action="#" class="show__form" method="post" id="show_form">
-                           <div class="show__form_doubleinput">
-                                 <input type="text" name="name" class="show__form_input" placeholder="Name...">
-                                 <input type="text" name="surname" class="show__form_input" placeholder="Surname...">
-                           </div>
-                           <input type="text" name="email" class="show__form_input" placeholder="Email...">
-                           <input type="text" name="password" class="show__form_input" placeholder="Password...">
-                           <input type='hidden' name='id_a' value="0">
-                           <input type='hidden' name='return' value="admin.php">
-                            <input  onclick="Add_New_User()"  type="submit" class="show__form_button" value="Add new">
+                            <input type="text" name="name" class="show__form_input" placeholder="Name...">
+                            <input type='hidden' name='id_a' value="0">
+                            <input onclick="Add_New_User()"  type="submit" class="show__form_button" value="Add new">
                             <div class="show__form_doubleinput">
                                 <input onclick="Edit_User()" type="submit" class="show__form_button" value = "Update">
                                 <input onclick="Delete_User()" type="submit" class="show__form_button" value="Delete">
@@ -184,61 +175,59 @@
     let user_buttons = user_buttons_list.querySelectorAll('.data_button');
     if (user_buttons[0] != null) {
         user_buttons[0].classList.add('active');
-        const dataArray = user_buttons[0].getElementsByTagName('p');
-       const editContainer = document.querySelector('.show__element');
+       
+        let form = user_buttons[0].querySelector('form');
+        let name = form.querySelector('p').innerHTML;
+        let id = form.querySelector('input').value;
+
+        const editContainer = document.querySelector('.show__element');
        const inputList = editContainer.getElementsByTagName('input');
-       inputList[0].value = dataArray[0].innerHTML;
-       inputList[1].value = dataArray[1].innerHTML;
-       inputList[2].value = dataArray[2].innerHTML;
-       inputList[3].value = dataArray[3].innerHTML;
-       inputList[4].value = dataArray[0].innerHTML;
+       
+
+       inputList[0].value = name;
+       inputList[1].value = id;
     }
 
     function DataClick(el){
        user_buttons_list.querySelector('.active').classList.remove('active');
         el.classList.add('active');
-       const dataArray = el.getElementsByTagName('p');
-       const editContainer = document.querySelector('.show__element');
+        
+        let form = el.querySelector('form');
+        let name = form.querySelector('p').innerHTML;
+        let id = form.querySelector('input').value;
+
+        const editContainer = document.querySelector('.show__element');
        const inputList = editContainer.getElementsByTagName('input');
-       inputList[0].value = dataArray[0].innerHTML;
-       inputList[1].value = dataArray[1].innerHTML;
-       inputList[2].value = dataArray[2].innerHTML;
-       inputList[3].value = dataArray[3].innerHTML;
-       inputList[4].value = el.name;
-    }
-    function BrandClick(el){
-        user_buttons_list.querySelector('.active').classList.remove('active');
-        el.classList.add('active');
-       const dataArray = el.getElementsByTagName('p');
-       const editContainer = document.querySelector('.show__brand');
-       const inputList = editContainer.getElementsByTagName('input');
-       inputList[0].value = dataArray[0].innerHTML;
-       inputList[1].value = dataArray[1].innerHTML;
-       inputList[2].value = el.name;
+       
+
+       inputList[0].value = name;
+       inputList[1].value = id;
     }
     function Add_New_User(){
         const form = document.getElementById('show_form');  
-        form.action = "add_user.php"
+        form.action = "add_brand.php"
     }
     function Edit_User(){
         const form = document.getElementById('show_form');  
-        form.action = "edit_user.php"
+        form.action = "edit_brand.php"
     }
     function Delete_User(){
         const form = document.getElementById('show_form');  
-        form.action = "delete_user.php"
+        form.action = "delete_brand.php"
     }
 </script>
-<script>function Go_Users() {
-    window.location.href = 'admin.php';
-}
-function Go_Products() {
-    window.location.href = 'products.php';
-}
-function Go_Brands() {
-    window.location.href = 'brands.php';
-}
-function Go_Categories() {
-    window.location.href = 'categories.php';
-}</script>
+<script>
+    function Go_Users() {
+        window.location.href = 'admin.php';
+    }
+    function Go_Products() {
+        window.location.href = 'products.php';
+    }
+    function Go_Brands() {
+        window.location.href = 'brands.php';
+    }
+    function Go_Categories() {
+        window.location.href = 'categories.php';
+    }
+</script>
 </html>
